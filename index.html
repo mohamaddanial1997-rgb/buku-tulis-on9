@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Buku Tulis Digital</title>
+    <title>Buku Tulis Digital Cikgu Danial</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         body { 
@@ -16,28 +16,32 @@
         .container { 
             max-width: 650px; 
             margin: 0 auto; 
-            background: rgba(255, 255, 255, 0.95); 
-            padding: 25px; 
+            background: rgba(255, 255, 255, 0.98); 
+            padding: 20px; 
             border-radius: 16px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
         }
-        h2 { text-align: center; color: #2c3e50; font-weight: 800; font-size: 28px; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #7f8c8d; font-size: 14px; margin-bottom: 25px; }
+        h2 { text-align: center; color: #2c3e50; font-weight: 800; font-size: 26px; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #7f8c8d; font-size: 14px; margin-bottom: 20px; }
         
-        .student-info { background: #f8f9fa; padding: 15px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e0e0e0; }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { font-weight: 600; color: #34495e; display: block; margin-bottom: 5px; }
+        .student-info { background: #f8f9fa; padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #e0e0e0; }
+        .form-group { margin-bottom: 10px; }
+        .form-group label { font-weight: 700; color: #34495e; display: block; margin-bottom: 5px; }
         input[type="text"] { 
             width: 100%; padding: 12px; border: 2px solid #bdc3c7; 
             border-radius: 8px; font-size: 16px; box-sizing: border-box; font-family: 'Nunito', sans-serif;
         }
 
         .activity-box { 
-            background: #ffffff; padding: 20px; border-radius: 12px; 
-            margin-bottom: 25px; border: 2px solid #e1e8ed;
+            background: #ffffff; padding: 18px; border-radius: 12px; 
+            margin-bottom: 20px; border: 2px solid #e1e8ed;
         }
-        .activity-box h3 { color: #e67e22; margin-top: 0; font-weight: 800; border-bottom: 2px dashed #f39c12; padding-bottom: 10px; }
-        .activity-desc { font-size: 15px; color: #555; line-height: 1.5; }
+        .activity-box h3 { color: #e67e22; margin-top: 0; font-weight: 800; border-bottom: 2px dashed #f39c12; padding-bottom: 8px; }
+        .activity-desc { font-size: 14px; color: #555; line-height: 1.5; }
+        
+        /* MUKA SURAT KERTAS (CANVAS) */
+        .page-wrapper { margin-bottom: 15px; }
+        .page-label { font-size: 13px; font-weight: 700; color: #7f8c8d; margin-bottom: 5px; display: block; }
         
         .canvas-container { 
             border: 2px solid #95a5a6; 
@@ -45,37 +49,49 @@
             overflow: hidden; 
             touch-action: none; 
             background-color: #fff;
+            /* Garisan Buku Latihan */
             background-image: repeating-linear-gradient(transparent, transparent 38px, #81ecec 38px, #81ecec 40px);
             background-position: 0 10px;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
         canvas { display: block; width: 100%; height: 320px; cursor: crosshair; }
         
-        .tools { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; }
+        /* ALAT PEN / PEMADAM */
+        .tools { display: flex; gap: 6px; justify-content: center; margin-bottom: 8px; flex-wrap: wrap; }
         button { 
-            padding: 10px 18px; border: none; border-radius: 8px; 
-            cursor: pointer; font-weight: 600; font-size: 14px; 
+            padding: 8px 14px; border: none; border-radius: 8px; 
+            cursor: pointer; font-weight: 700; font-size: 13px; 
             font-family: 'Nunito', sans-serif;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 5px rgba(0,0,0,0.1);
+            transition: transform 0.1s;
         }
+        button:active { transform: scale(0.96); }
         .btn-pen { background: #3498db; color: white; }
         .btn-eraser { background: #e74c3c; color: white; }
         .btn-clear { background: #95a5a6; color: white; }
-        .active-tool { border: 3px solid #2c3e50; transform: scale(1.05); }
+        .btn-add-page { background: #f39c12; color: white; width: 100%; margin-top: 5px; font-size: 14px; padding: 10px; }
+        .active-tool { border: 2.5px solid #2c3e50; transform: scale(1.05); }
 
-        .btn-submit { 
-            background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; 
-            width: 100%; font-size: 18px; font-weight: 800; padding: 18px; 
-            margin-top: 10px; border-radius: 12px; text-transform: uppercase;
+        /* BUTANG TINDAKAN UTAMA */
+        .action-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+        .btn-telegram { 
+            background: linear-gradient(135deg, #0088cc, #006699); color: white; 
+            width: 100%; font-size: 17px; font-weight: 800; padding: 16px; 
+            border-radius: 12px; text-align: center; text-decoration: none; box-sizing: border-box;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
         }
-        .loading { display: none; text-align: center; font-weight: 800; color: #d35400; margin-top: 15px; }
+        .btn-download { 
+            background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; 
+            width: 100%; font-size: 16px; font-weight: 800; padding: 14px; 
+            border-radius: 12px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Buku Tulis Digital 📝</h2>
-    <div class="subtitle">Platform Latihan Menulis Pintar</div>
+    <div class="subtitle">Tugasan Bahasa Melayu - Cikgu Danial</div>
     
     <div class="student-info">
         <div class="form-group">
@@ -93,14 +109,10 @@
         <h3>🎯 Aktiviti 1: Tulis Kata Majmuk</h3>
         <p class="activity-desc">Sila tulis perkataan berikut dengan kemas:<br> <b>Pasar raya, Tukang gunting, Nasi ayam, Tengah hari, Alat tulis, Tali pinggang, Beg tangan, Tempat letak kereta.</b></p>
         
-        <div class="tools">
-            <button class="btn-pen active-tool" onclick="setMode('pen', 'canvas1', this)">✏️ Pen</button>
-            <button class="btn-eraser" onclick="setMode('eraser', 'canvas1', this)">🧽 Pemadam</button>
-            <button class="btn-clear" onclick="clearCanvas('canvas1')">🗑️ Padam Semua</button>
+        <div id="act1-pages">
+            <!-- Halaman akan ditambah secara dinamik di sini -->
         </div>
-        <div class="canvas-container">
-            <canvas id="canvas1"></canvas>
-        </div>
+        <button class="btn-add-page" onclick="addNewPage('act1-pages', 'Aktiviti 1')">➕ Tambah Kertas (Aktiviti 1)</button>
     </div>
 
     <!-- AKTIVITI 2 -->
@@ -108,53 +120,69 @@
         <h3>✍️ Aktiviti 2: Bina 5 Ayat</h3>
         <p class="activity-desc">Bina 5 ayat menggunakan kata majmuk di atas. Tulis satu ayat pada setiap baris.</p>
         
-        <div class="tools">
-            <button class="btn-pen active-tool" onclick="setMode('pen', 'canvas2', this)">✏️ Pen</button>
-            <button class="btn-eraser" onclick="setMode('eraser', 'canvas2', this)">🧽 Pemadam</button>
-            <button class="btn-clear" onclick="clearCanvas('canvas2')">🗑️ Padam Semua</button>
+        <div id="act2-pages">
+            <!-- Halaman akan ditambah secara dinamik di sini -->
         </div>
-        <div class="canvas-container">
-            <canvas id="canvas2"></canvas>
-        </div>
+        <button class="btn-add-page" onclick="addNewPage('act2-pages', 'Aktiviti 2')">➕ Tambah Kertas (Aktiviti 2)</button>
     </div>
 
-    <button class="btn-submit" onclick="submitWork()">🚀 Hantar Kerja</button>
-    <div id="loading" class="loading">⏳ Menghantar data ke Google Sheet... Sila tunggu sebentar.</div>
+    <!-- BUTANG TINDAKAN -->
+    <div class="action-buttons">
+        <button class="btn-download" onclick="downloadAllPages()">💾 Muat Turun Semua Kertas (PNG)</button>
+        <button class="btn-telegram" onclick="sendToTelegram()">📲 Muat Turun & Hantar ke Telegram Cikgu</button>
+    </div>
 </div>
 
-<!-- BORANG TERSEMBUNYI UNTUK PENGHANTARAN DATA TANPA SEKATAN CORS -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { onSuccess(); }"></iframe>
-<form id="scriptForm" action="https://script.google.com/macros/s/AKfycbxL2F2fhwhUeS58e10BhxFX9Eu2rL8uyNdFBIAGN7XI3xleLmwsMZ4cKCSWz2ISaAL3GQ/exec" method="POST" target="hidden_iframe" style="display:none;">
-    <input type="hidden" name="nama" id="f_nama">
-    <input type="hidden" name="kelas" id="f_kelas">
-    <input type="hidden" name="markah" id="f_markah">
-    <input type="hidden" name="image1" id="f_image1">
-    <input type="hidden" name="image2" id="f_image2">
-</form>
-
 <script>
-    let submitted = false;
+    let pageCounter = 0;
+    const allCanvases = [];
 
-    function setupCanvas(canvasId) {
+    // Fungsi Tambah Muka Surat Baru
+    function addNewPage(containerId, activityName) {
+        pageCounter++;
+        const canvasId = `canvas_${pageCounter}`;
+        const container = document.getElementById(containerId);
+        const pageNum = container.children.length + 1;
+
+        const pageWrapper = document.createElement('div');
+        pageWrapper.className = 'page-wrapper';
+        pageWrapper.innerHTML = `
+            <span class="page-label">📄 ${activityName} - Muka Surat ${pageNum}</span>
+            <div class="tools">
+                <button class="btn-pen active-tool" onclick="setCanvasMode('${canvasId}', 'pen', this)">✏️ Pen</button>
+                <button class="btn-eraser" onclick="setCanvasMode('${canvasId}', 'eraser', this)">🧽 Pemadam</button>
+                <button class="btn-clear" onclick="clearCanvas('${canvasId}')">🗑️ Padam Semua</button>
+            </div>
+            <div class="canvas-container">
+                <canvas id="${canvasId}"></canvas>
+            </div>
+        `;
+
+        container.appendChild(pageWrapper);
+        initCanvas(canvasId);
+    }
+
+    // Inisialisasi Kanvas Melukis
+    function initCanvas(canvasId) {
         const canvas = document.getElementById(canvasId);
         const ctx = canvas.getContext('2d');
-        
+
         canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = 320; 
+        canvas.height = 320;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         let drawing = false;
-        let mode = 'pen'; 
-        
+        let mode = 'pen';
+
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
 
-        const startPosition = (e) => {
+        const startDraw = (e) => {
             drawing = true;
             draw(e);
         };
 
-        const endPosition = () => {
+        const stopDraw = () => {
             drawing = false;
             ctx.beginPath();
         };
@@ -162,7 +190,7 @@
         const draw = (e) => {
             if (!drawing) return;
             e.preventDefault();
-            
+
             const rect = canvas.getBoundingClientRect();
             const clientX = e.clientX || (e.touches && e.touches[0].clientX);
             const clientY = e.clientY || (e.touches && e.touches[0].clientY);
@@ -172,11 +200,11 @@
 
             if (mode === 'pen') {
                 ctx.globalCompositeOperation = "source-over";
-                ctx.lineWidth = 3.5; 
-                ctx.strokeStyle = '#000000'; 
+                ctx.lineWidth = 3.5;
+                ctx.strokeStyle = '#000000';
             } else {
                 ctx.globalCompositeOperation = "destination-out";
-                ctx.lineWidth = 25; 
+                ctx.lineWidth = 25;
             }
 
             ctx.lineTo(x, y);
@@ -185,104 +213,132 @@
             ctx.moveTo(x, y);
         };
 
-        canvas.addEventListener('mousedown', startPosition);
-        canvas.addEventListener('mouseup', endPosition);
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mouseup', stopDraw);
         canvas.addEventListener('mousemove', draw);
-        
-        canvas.addEventListener('touchstart', startPosition, { passive: false });
-        canvas.addEventListener('touchend', endPosition);
+
+        canvas.addEventListener('touchstart', startDraw, { passive: false });
+        canvas.addEventListener('touchend', stopDraw);
         canvas.addEventListener('touchmove', draw, { passive: false });
 
-        canvas.setMode = function(newMode) { mode = newMode; };
-        canvas.clear = function() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        };
+        canvas.drawingMode = mode;
+        allCanvases.push(canvasId);
     }
 
-    setupCanvas('canvas1');
-    setupCanvas('canvas2');
+    // Tukar Mod Pen / Pemadam
+    function setCanvasMode(canvasId, mode, btn) {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext('2d');
+        
+        // Simpan mod pada elemen kanvas
+        canvas.drawingMode = mode;
 
-    function setMode(mode, canvasId, buttonElement) {
-        document.getElementById(canvasId).setMode(mode);
-        const toolsBox = buttonElement.parentElement;
+        // Kemaskini butang aktif
+        const toolsBox = btn.parentElement;
         const buttons = toolsBox.getElementsByTagName('button');
-        for(let btn of buttons) { btn.classList.remove('active-tool'); }
-        buttonElement.classList.add('active-tool');
+        for (let b of buttons) { b.classList.remove('active-tool'); }
+        btn.classList.add('active-tool');
+
+        // Hack event listener untuk baca mod terkini
+        const startDraw = (e) => {
+            let drawing = true;
+            const draw = (e) => {
+                if (!drawing) return;
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+                const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+                if (canvas.drawingMode === 'pen') {
+                    ctx.globalCompositeOperation = "source-over";
+                    ctx.lineWidth = 3.5;
+                    ctx.strokeStyle = '#000000';
+                } else {
+                    ctx.globalCompositeOperation = "destination-out";
+                    ctx.lineWidth = 25;
+                }
+
+                ctx.lineTo(clientX - rect.left, clientY - rect.top);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(clientX - rect.left, clientY - rect.top);
+            };
+
+            const stopDraw = () => {
+                drawing = false;
+                ctx.beginPath();
+            };
+
+            canvas.onmousemove = draw;
+            canvas.onmouseup = stopDraw;
+            canvas.ontouchmove = draw;
+            canvas.ontouchend = stopDraw;
+        };
+        
+        canvas.onmousedown = startDraw;
+        canvas.ontouchstart = startDraw;
     }
 
+    // FUNGSI PADAM SEMUA (PASTI BERFUNGSINYA)
     function clearCanvas(canvasId) {
-        if(confirm("Padam semua tulisan di ruangan ini?")) {
-            document.getElementById(canvasId).clear();
+        if (confirm("Adakah anda pasti mahu memadam semua tulisan pada muka surat ini?")) {
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         }
     }
 
-    function getCanvasWithWhiteBackground(canvasId) {
-        const originalCanvas = document.getElementById(canvasId);
+    // Cipta Gambar Latar Belakang Putih untuk Muat Turun
+    function getCanvasImage(canvasId) {
+        const origCanvas = document.getElementById(canvasId);
         const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = originalCanvas.width;
-        tempCanvas.height = originalCanvas.height;
-        const tCtx = tempCanvas.getContext('2d');
-        
-        tCtx.fillStyle = "#ffffff";
-        tCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-        tCtx.drawImage(originalCanvas, 0, 0);
-        
+        tempCanvas.width = origCanvas.width;
+        tempCanvas.height = origCanvas.height;
+        const ctx = tempCanvas.getContext('2d');
+
+        // Isi latar belakang putih
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+        ctx.drawImage(origCanvas, 0, 0);
+
         return tempCanvas.toDataURL('image/png');
     }
 
-    function calculateAIScore(canvasId) {
-        const canvas = document.getElementById(canvasId);
-        const ctx = canvas.getContext('2d');
-        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        let filledPixels = 0;
-
-        for (let i = 3; i < imgData.data.length; i += 4) {
-            if (imgData.data[i] > 0) filledPixels++;
-        }
-
-        const ratio = filledPixels / (canvas.width * canvas.height);
+    // Muat Turun Semua Halaman
+    function downloadAllPages() {
+        const nama = document.getElementById('nama').value.trim() || 'Murid';
         
-        if (ratio > 0.02) return 95;      
-        else if (ratio > 0.01) return 80; 
-        else if (ratio > 0.003) return 60;
-        else return 30;                   
+        allCanvases.forEach((canvasId, index) => {
+            const imgData = getCanvasImage(canvasId);
+            const link = document.createElement('a');
+            link.download = `${nama}_Halaman_${index + 1}.png`;
+            link.href = imgData;
+            link.click();
+        });
     }
 
-    function submitWork() {
-        const nama = document.getElementById('nama').value;
-        const kelas = document.getElementById('kelas').value;
-        
+    // Muat Turun & Buka Telegram Cikgu Danial
+    function sendToTelegram() {
+        const nama = document.getElementById('nama').value.trim();
+        const kelas = document.getElementById('kelas').value.trim();
+
         if (!nama || !kelas) {
-            alert('Sila isi Nama dan Kelas terlebih dahulu.');
+            alert("Sila isi Nama dan Kelas terlebih dahulu.");
             return;
         }
 
-        const img1 = getCanvasWithWhiteBackground('canvas1');
-        const img2 = getCanvasWithWhiteBackground('canvas2');
-        const markah = calculateAIScore('canvas2');
+        // Muat turun gambar ke telefon murid dahulu
+        downloadAllPages();
 
-        document.getElementById('loading').style.display = 'block';
+        alert(`✅ Gambar tugasan telah disimpan ke dalam telefon anda.\n\nSistem akan membuka Telegram Cikgu Danial. Sila 'Attach/Paste' gambar tersebut kepada Cikgu Danial.`);
 
-        // Masukkan nilai ke dalam form tersembunyi
-        document.getElementById('f_nama').value = nama;
-        document.getElementById('f_kelas').value = kelas;
-        document.getElementById('f_markah').value = markah + "%";
-        document.getElementById('f_image1').value = img1;
-        document.getElementById('f_image2').value = img2;
-
-        submitted = true;
-        // Hantar form ke Google Script secara senyap
-        document.getElementById('scriptForm').submit();
+        // Buka pautan Telegram Cikgu Danial
+        window.open('https://t.me/Encikdenial', '_blank');
     }
 
-    function onSuccess() {
-        document.getElementById('loading').style.display = 'none';
-        const markah = document.getElementById('f_markah').value;
-        alert(`✅ BERJAYA!\n\nKerja anda telah selamat dihantar kepada cikgu.\nMarkah AI Kelengkapan: ${markah}`);
-        document.getElementById('canvas1').clear();
-        document.getElementById('canvas2').clear();
-        submitted = false;
-    }
+    // Tambah 1 Muka Surat Asal untuk Setiap Aktiviti
+    addNewPage('act1-pages', 'Aktiviti 1');
+    addNewPage('act2-pages', 'Aktiviti 2');
 </script>
 </body>
 </html>
