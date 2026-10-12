@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Buku Tulis Digital</title>
-    <!-- Font yang lebih ceria dan kemas -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
     <style>
         body { 
             font-family: 'Nunito', sans-serif; 
@@ -32,30 +30,24 @@
         input[type="text"] { 
             width: 100%; padding: 12px; border: 2px solid #bdc3c7; 
             border-radius: 8px; font-size: 16px; box-sizing: border-box; font-family: 'Nunito', sans-serif;
-            transition: border-color 0.3s;
         }
-        input[type="text"]:focus { outline: none; border-color: #3498db; }
 
         .activity-box { 
             background: #ffffff; padding: 20px; border-radius: 12px; 
             margin-bottom: 25px; border: 2px solid #e1e8ed;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
         }
         .activity-box h3 { color: #e67e22; margin-top: 0; font-weight: 800; border-bottom: 2px dashed #f39c12; padding-bottom: 10px; }
         .activity-desc { font-size: 15px; color: #555; line-height: 1.5; }
         
-        /* REKA BENTUK BUKU LATIHAN */
         .canvas-container { 
             border: 2px solid #95a5a6; 
             border-radius: 8px; 
             overflow: hidden; 
             touch-action: none; 
             background-color: #fff;
-            /* Corak garisan buku latihan */
             background-image: repeating-linear-gradient(transparent, transparent 38px, #81ecec 38px, #81ecec 40px);
-            background-position: 0 10px; /* Jarak dari atas */
+            background-position: 0 10px;
             margin-bottom: 15px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
         }
         canvas { display: block; width: 100%; height: 320px; cursor: crosshair; }
         
@@ -63,33 +55,27 @@
         button { 
             padding: 10px 18px; border: none; border-radius: 8px; 
             cursor: pointer; font-weight: 600; font-size: 14px; 
-            font-family: 'Nunito', sans-serif; transition: transform 0.2s, opacity 0.2s;
+            font-family: 'Nunito', sans-serif;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        button:active { transform: scale(0.95); }
-        
         .btn-pen { background: #3498db; color: white; }
         .btn-eraser { background: #e74c3c; color: white; }
         .btn-clear { background: #95a5a6; color: white; }
-        
-        /* Butang aktif */
-        .active-tool { border: 3px solid #2c3e50; transform: scale(1.05); box-shadow: 0 0 10px rgba(0,0,0,0.3); }
+        .active-tool { border: 3px solid #2c3e50; transform: scale(1.05); }
 
         .btn-submit { 
             background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; 
             width: 100%; font-size: 18px; font-weight: 800; padding: 18px; 
-            margin-top: 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 1px;
+            margin-top: 10px; border-radius: 12px; text-transform: uppercase;
         }
-        .btn-submit:hover { opacity: 0.9; }
-        
-        .loading { display: none; text-align: center; font-weight: 800; color: #d35400; margin-top: 15px; font-size: 16px; }
+        .loading { display: none; text-align: center; font-weight: 800; color: #d35400; margin-top: 15px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h2>Buku Tulis Digital 📝</h2>
-    <div class="subtitle">Platform Latihan Menulis Pintar dengan Semakan AI</div>
+    <div class="subtitle">Platform Latihan Menulis Pintar</div>
     
     <div class="student-info">
         <div class="form-group">
@@ -108,8 +94,8 @@
         <p class="activity-desc">Sila tulis perkataan berikut dengan kemas:<br> <b>Pasar raya, Tukang gunting, Nasi ayam, Tengah hari, Alat tulis, Tali pinggang, Beg tangan, Tempat letak kereta.</b></p>
         
         <div class="tools">
-            <button id="pen-canvas1" class="btn-pen active-tool" onclick="setMode('pen', 'canvas1', this)">✏️ Pen</button>
-            <button id="eraser-canvas1" class="btn-eraser" onclick="setMode('eraser', 'canvas1', this)">🧽 Pemadam</button>
+            <button class="btn-pen active-tool" onclick="setMode('pen', 'canvas1', this)">✏️ Pen</button>
+            <button class="btn-eraser" onclick="setMode('eraser', 'canvas1', this)">🧽 Pemadam</button>
             <button class="btn-clear" onclick="clearCanvas('canvas1')">🗑️ Padam Semua</button>
         </div>
         <div class="canvas-container">
@@ -123,8 +109,8 @@
         <p class="activity-desc">Bina 5 ayat menggunakan kata majmuk di atas. Tulis satu ayat pada setiap baris.</p>
         
         <div class="tools">
-            <button id="pen-canvas2" class="btn-pen active-tool" onclick="setMode('pen', 'canvas2', this)">✏️ Pen</button>
-            <button id="eraser-canvas2" class="btn-eraser" onclick="setMode('eraser', 'canvas2', this)">🧽 Pemadam</button>
+            <button class="btn-pen active-tool" onclick="setMode('pen', 'canvas2', this)">✏️ Pen</button>
+            <button class="btn-eraser" onclick="setMode('eraser', 'canvas2', this)">🧽 Pemadam</button>
             <button class="btn-clear" onclick="clearCanvas('canvas2')">🗑️ Padam Semua</button>
         </div>
         <div class="canvas-container">
@@ -132,29 +118,23 @@
         </div>
     </div>
 
-    <button class="btn-submit" onclick="submitWork()">🚀 Hantar & Semak dengan AI</button>
-    <div id="loading" class="loading">⏳ Sistem AI sedang mengimbas tulisan & menghantar data... Sila tunggu sebentar.</div>
+    <button class="btn-submit" onclick="submitWork()">🚀 Hantar Kerja</button>
+    <div id="loading" class="loading">⏳ Menghantar data ke Google Sheet... Sila tunggu sebentar.</div>
 </div>
 
 <script>
-    // ==========================================
-    // MASUKKAN URL WEB APP GOOGLE SCRIPT DI SINI
-    // ==========================================
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMcxITJ9NRU-yWfovnF-ixpK1Fjn1oAU8L9hdazjMZtLK1IJ4jPI0Wt7qmjgauDLhgIQ/exec'; 
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyePHeUYLmKF0bSrIErzljkTl3wLYzSFAvnXSihMWATWu1qq4H7XwiF_dJ4Dro6k1CQWw/exec'; 
 
     function setupCanvas(canvasId) {
         const canvas = document.getElementById(canvasId);
-        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        const ctx = canvas.getContext('2d');
         
-        // Tetapkan resolusi agar tajam mengikut saiz kontena
         canvas.width = canvas.parentElement.clientWidth;
         canvas.height = 320; 
-        
-        // KOSONGKAN kanvas pada mulanya supaya garisan CSS di belakang kelihatan
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         let drawing = false;
-        let mode = 'pen'; // 'pen' atau 'eraser'
+        let mode = 'pen'; 
         
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
@@ -174,19 +154,19 @@
             e.preventDefault();
             
             const rect = canvas.getBoundingClientRect();
-            // Sokong sentuhan (touch) dan tetikus (mouse)
-            const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
-            const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+            const x = clientX - rect.left;
+            const y = clientY - rect.top;
 
             if (mode === 'pen') {
                 ctx.globalCompositeOperation = "source-over";
-                ctx.lineWidth = 3.5; // Ketebalan pen standard
-                ctx.strokeStyle = '#000000'; // Warna dakwat hitam
+                ctx.lineWidth = 3.5; 
+                ctx.strokeStyle = '#000000'; 
             } else {
-                // FUNGSI PEMADAM SEBENAR: Padam strok jadi lutsinar (tanpa rosakkan garisan buku)
                 ctx.globalCompositeOperation = "destination-out";
                 ctx.lineWidth = 25; 
-                ctx.strokeStyle = "rgba(0,0,0,1)"; 
             }
 
             ctx.lineTo(x, y);
@@ -195,7 +175,6 @@
             ctx.moveTo(x, y);
         };
 
-        // Event Listeners
         canvas.addEventListener('mousedown', startPosition);
         canvas.addEventListener('mouseup', endPosition);
         canvas.addEventListener('mousemove', draw);
@@ -206,35 +185,27 @@
 
         canvas.setMode = function(newMode) { mode = newMode; };
         canvas.clear = function() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // Bersihkan jadi lutsinar semula
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         };
     }
 
     setupCanvas('canvas1');
     setupCanvas('canvas2');
 
-    // Fungsi Tukar Alat (Pen / Pemadam) & Animasi Butang
     function setMode(mode, canvasId, buttonElement) {
         document.getElementById(canvasId).setMode(mode);
-        
-        // Buang kelas 'active-tool' dari semua butang pada kanvas tersebut
         const toolsBox = buttonElement.parentElement;
         const buttons = toolsBox.getElementsByTagName('button');
         for(let btn of buttons) { btn.classList.remove('active-tool'); }
-        
-        // Tambah kelas 'active-tool' pada butang yang ditekan
         buttonElement.classList.add('active-tool');
     }
 
-    // Fungsi Padam Semua (Clear)
     function clearCanvas(canvasId) {
-        if(confirm("Adakah anda pasti mahu memadam semua tulisan di ruangan ini?")) {
+        if(confirm("Padam semua tulisan di ruangan ini?")) {
             document.getElementById(canvasId).clear();
         }
     }
 
-    // FUNGSI TAMBAH LATAR PUTIH UNTUK GAMBAR (Untuk AI & Save ke Drive)
-    // Kerana kanvas kita sekarang lutsinar, jika disimpan terus ia akan jadi gelap/pelik.
     function getCanvasWithWhiteBackground(canvasId) {
         const originalCanvas = document.getElementById(canvasId);
         const tempCanvas = document.createElement('canvas');
@@ -242,16 +213,32 @@
         tempCanvas.height = originalCanvas.height;
         const tCtx = tempCanvas.getContext('2d');
         
-        // Isi dengan warna putih
         tCtx.fillStyle = "#ffffff";
         tCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-        // Lukis tulisan murid di atasnya
         tCtx.drawImage(originalCanvas, 0, 0);
         
         return tempCanvas.toDataURL('image/png');
     }
 
-    // Hantar Kerja
+    // AI PINTAR: Kira markah berdasarkan peratusan kepadatan strok tulisan murid
+    function calculateAIScore(canvasId) {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext('2d');
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let filledPixels = 0;
+
+        for (let i = 3; i < imgData.data.length; i += 4) {
+            if (imgData.data[i] > 0) filledPixels++; // Kira piksel yang dilukis
+        }
+
+        const ratio = filledPixels / (canvas.width * canvas.height);
+        
+        if (ratio > 0.02) return 95;      // Tulisan sangat banyak/penuh
+        else if (ratio > 0.01) return 80; // Tulisan sederhana
+        else if (ratio > 0.003) return 60;// Tulisan sikit
+        else return 30;                   // Hampir kosong
+    }
+
     async function submitWork() {
         const nama = document.getElementById('nama').value;
         const kelas = document.getElementById('kelas').value;
@@ -261,50 +248,36 @@
             return;
         }
 
-        // Ambil imej yang telah diletakkan latar belakang putih
         const img1 = getCanvasWithWhiteBackground('canvas1');
         const img2 = getCanvasWithWhiteBackground('canvas2');
+        
+        // Kira markah secara automatik
+        const markah = calculateAIScore('canvas2');
 
         document.getElementById('loading').style.display = 'block';
-        window.scrollTo(0, document.body.scrollHeight);
+
+        const payload = {
+            nama: nama,
+            kelas: kelas,
+            markah: markah + "%",
+            image1: img1,
+            image2: img2
+        };
 
         try {
-            // AI SCANNING (OCR) MENGGUNAKAN TESSERACT.JS (BACA AKTIVITI 2)
-            const worker = await Tesseract.createWorker('msa'); 
-            const { data: { text } } = await worker.recognize(img2);
-            await worker.terminate();
-
-            // LOGIK MARKAH ASAS 
-            let markah = 0;
-            const perkataan = text.trim().split(/\s+/).filter(word => word.length > 1).length;
-            if (perkataan >= 20) markah = Math.floor(Math.random() * (100 - 85 + 1)) + 85; // Cemerlang (85-100)
-            else if (perkataan >= 10) markah = Math.floor(Math.random() * (84 - 60 + 1)) + 60; // Sederhana (60-84)
-            else markah = 40; // Kurang memuaskan
-
-            alert(`🔍 Imbasan AI Selesai!\n\nTeks dikesan:\n"${text.substring(0, 50)}..."\n\nAnggaran Markah AI: ${markah}/100`);
-
-            // HANTAR KE GOOGLE SHEETS & DRIVE
-            const payload = {
-                nama: nama,
-                kelas: kelas,
-                markah: markah + "%",
-                image1: img1,
-                image2: img2
-            };
-
-            const response = await fetch(APPS_SCRIPT_URL, {
+            await fetch(APPS_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors', 
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
 
-            alert('✅ Berjaya! Kerja anda telah dihantar kepada cikgu.');
+            alert(`✅ BERJAYA!\n\nKerja anda telah dihantar.\nMarkah AI Kelengkapan: ${markah}/100`);
             document.getElementById('canvas1').clear();
             document.getElementById('canvas2').clear();
             
         } catch (error) {
-            alert('❌ Ralat semasa menghantar. Sila cuba lagi. Ralat: ' + error.message);
+            alert('❌ Ralat semasa menghantar. Sila cuba lagi.');
         } finally {
             document.getElementById('loading').style.display = 'none';
         }
