@@ -4,78 +4,139 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Buku Tulis Digital</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
+        * { box-sizing: border-box; }
         body { 
             font-family: 'Nunito', sans-serif; 
-            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%); 
+            background: linear-gradient(135deg, #a8edd9 0%, #fed6e3 100%); 
             margin: 0; 
-            padding: 15px; 
+            padding: 12px; 
             min-height: 100vh;
         }
         .container { 
             max-width: 650px; 
             margin: 0 auto; 
-            background: rgba(255, 255, 255, 0.95); 
-            padding: 25px; 
-            border-radius: 16px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            background: #ffffff; 
+            padding: 20px; 
+            border-radius: 20px; 
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12); 
         }
-        h2 { text-align: center; color: #2c3e50; font-weight: 800; font-size: 28px; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #7f8c8d; font-size: 14px; margin-bottom: 25px; }
         
-        .student-info { background: #f8f9fa; padding: 15px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e0e0e0; }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { font-weight: 600; color: #34495e; display: block; margin-bottom: 5px; }
-        input[type="text"] { 
-            width: 100%; padding: 12px; border: 2px solid #bdc3c7; 
-            border-radius: 8px; font-size: 16px; box-sizing: border-box; font-family: 'Nunito', sans-serif;
+        .header-title {
+            text-align: center;
+            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            font-size: 28px;
+            margin: 5px 0;
         }
+        .subtitle { text-align: center; color: #7f8c8d; font-size: 14px; margin-bottom: 20px; font-weight: 600; }
+        
+        /* MACAM BUKU LATIHAN */
+        .student-info { 
+            background: #f0f7ff; 
+            padding: 15px; 
+            border-radius: 14px; 
+            margin-bottom: 20px; 
+            border: 2px dashed #4a90e2; 
+        }
+        .form-group { margin-bottom: 10px; }
+        .form-group:last-child { margin-bottom: 0; }
+        .form-group label { font-weight: 800; color: #2c3e50; display: block; margin-bottom: 4px; font-size: 14px; }
+        input[type="text"] { 
+            width: 100%; padding: 10px 14px; border: 2px solid #bdc3c7; 
+            border-radius: 10px; font-size: 15px; font-family: 'Nunito', sans-serif;
+            background: #fff; transition: 0.3s;
+        }
+        input[type="text"]:focus { border-color: #4a90e2; outline: none; }
 
         .activity-box { 
-            background: #ffffff; padding: 20px; border-radius: 12px; 
-            margin-bottom: 25px; border: 2px solid #e1e8ed;
+            background: #ffffff; padding: 18px; border-radius: 16px; 
+            margin-bottom: 20px; border: 2px solid #e1e8ed;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
-        .activity-box h3 { color: #e67e22; margin-top: 0; font-weight: 800; border-bottom: 2px dashed #f39c12; padding-bottom: 10px; }
-        .activity-desc { font-size: 15px; color: #555; line-height: 1.5; }
+        .activity-header {
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 2px dashed #f39c12; padding-bottom: 8px; margin-bottom: 12px;
+        }
+        .activity-box h3 { color: #d35400; margin: 0; font-weight: 800; font-size: 18px; }
+        .activity-desc { font-size: 14px; color: #555; line-height: 1.5; margin-top: 0; }
+
+        /* PADANKAN PERKATAAN (AKTIVITI 1) */
+        .matching-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px;
+        }
+        .match-col { display: flex; flex-direction: column; gap: 8px; }
+        .match-card {
+            background: #f8f9fa; border: 2px solid #e0e0e0; padding: 10px 8px;
+            text-align: center; border-radius: 10px; font-weight: 700; font-size: 14px;
+            color: #333; cursor: pointer; user-select: none; transition: all 0.2s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+        }
+        .match-card:active { transform: scale(0.96); }
+        .match-card.selected { background: #ffeaa7; border-color: #fdcb6e; color: #d35400; }
+        .match-card.matched { background: #55efc4; border-color: #00b894; color: #006266; pointer-events: none; }
+        .match-card.wrong { background: #ff7675; border-color: #d63031; color: white; }
+
+        .score-badge {
+            background: #e17055; color: white; padding: 4px 10px; border-radius: 20px;
+            font-size: 12px; font-weight: 800; text-align: center; display: inline-block;
+        }
+
+        /* BUKU TULIS DIGITAL (AKTIVITI 2) */
+        .page-wrapper { margin-bottom: 15px; background: #fff; padding: 10px; border-radius: 12px; border: 1px solid #ddd; }
+        .page-title { font-size: 13px; font-weight: 800; color: #34495e; margin-bottom: 6px; display: block; }
         
         .canvas-container { 
-            border: 2px solid #95a5a6; 
+            border: 2px solid #7f8c8d; 
             border-radius: 8px; 
             overflow: hidden; 
             touch-action: none; 
             background-color: #fff;
-            background-image: repeating-linear-gradient(transparent, transparent 38px, #81ecec 38px, #81ecec 40px);
+            /* Garisan Buku Latihan */
+            background-image: repeating-linear-gradient(transparent, transparent 38px, #74b9ff 38px, #74b9ff 40px);
             background-position: 0 10px;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
         }
-        canvas { display: block; width: 100%; height: 320px; cursor: crosshair; }
+        canvas { display: block; width: 100%; height: 300px; cursor: crosshair; }
         
-        .tools { display: flex; gap: 8px; justify-content: center; margin-bottom: 15px; flex-wrap: wrap; }
-        button { 
-            padding: 10px 18px; border: none; border-radius: 8px; 
-            cursor: pointer; font-weight: 600; font-size: 14px; 
-            font-family: 'Nunito', sans-serif;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        .tools { display: flex; gap: 6px; justify-content: center; margin-bottom: 8px; flex-wrap: wrap; }
+        button.tool-btn { 
+            padding: 8px 12px; border: none; border-radius: 8px; 
+            cursor: pointer; font-weight: 700; font-size: 13px; 
+            font-family: 'Nunito', sans-serif; transition: 0.2s;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.1);
         }
-        .btn-pen { background: #3498db; color: white; }
-        .btn-eraser { background: #e74c3c; color: white; }
-        .btn-clear { background: #95a5a6; color: white; }
-        .active-tool { border: 3px solid #2c3e50; transform: scale(1.05); }
+        .btn-pen { background: #0984e3; color: white; }
+        .btn-eraser { background: #d63031; color: white; }
+        .btn-clear { background: #636e72; color: white; }
+        .active-tool { border: 2.5px solid #2d3436; transform: scale(1.05); }
+
+        .btn-add-page { 
+            background: #fdcb6e; color: #d35400; width: 100%; font-weight: 800; 
+            padding: 12px; border: 2px dashed #e17055; border-radius: 10px; cursor: pointer;
+            font-size: 14px; margin-top: 5px; font-family: 'Nunito', sans-serif;
+        }
+        .btn-add-page:hover { background: #ffeaa7; }
 
         .btn-submit { 
-            background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; 
-            width: 100%; font-size: 18px; font-weight: 800; padding: 18px; 
-            margin-top: 10px; border-radius: 12px; text-transform: uppercase;
+            background: linear-gradient(135deg, #00b894, #00b894); color: white; 
+            width: 100%; font-size: 18px; font-weight: 900; padding: 16px; 
+            margin-top: 10px; border-radius: 14px; border: none; cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,184,148,0.3); font-family: 'Nunito', sans-serif;
+            text-transform: uppercase; letter-spacing: 0.5px;
         }
+        .btn-submit:active { transform: scale(0.98); }
         .loading { display: none; text-align: center; font-weight: 800; color: #d35400; margin-top: 15px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Buku Tulis Digital 📝</h2>
-    <div class="subtitle">Platform Latihan Menulis Pintar</div>
+    <h2 class="header-title">Buku Tulis Digital 📝</h2>
+    <div class="subtitle">Bahasa Melayu: Kata Majmuk</div>
     
     <div class="student-info">
         <div class="form-group">
@@ -88,41 +149,39 @@
         </div>
     </div>
 
-    <!-- AKTIVITI 1 -->
+    <!-- AKTIVITI 1: PADANKAN PERKATAAN -->
     <div class="activity-box">
-        <h3>🎯 Aktiviti 1: Tulis Kata Majmuk</h3>
-        <p class="activity-desc">Sila tulis perkataan berikut dengan kemas:<br> <b>Pasar raya, Tukang gunting, Nasi ayam, Tengah hari, Alat tulis, Tali pinggang, Beg tangan, Tempat letak kereta.</b></p>
-        
-        <div class="tools">
-            <button class="btn-pen active-tool" onclick="setMode('pen', 'canvas1', this)">✏️ Pen</button>
-            <button class="btn-eraser" onclick="setMode('eraser', 'canvas1', this)">🧽 Pemadam</button>
-            <button class="btn-clear" onclick="clearCanvas('canvas1')">🗑️ Padam Semua</button>
+        <div class="activity-header">
+            <h3>🧩 Aktiviti 1: Padankan Kata Majmuk</h3>
+            <span class="score-badge" id="matchScore">0 / 8 Berjaya</span>
         </div>
-        <div class="canvas-container">
-            <canvas id="canvas1"></canvas>
+        <p class="activity-desc">Tekan perkataan di sebelah <b>Kiri</b>, kemudian tekan pasangan yang betul di sebelah <b>Kanan</b> untuk membentuk Kata Majmuk.</p>
+        
+        <div class="matching-grid">
+            <div class="match-col" id="colLeft"></div>
+            <div class="match-col" id="colRight"></div>
         </div>
     </div>
 
-    <!-- AKTIVITI 2 -->
+    <!-- AKTIVITI 2: BINA AYAT (BUKU DIGITAL) -->
     <div class="activity-box">
-        <h3>✍️ Aktiviti 2: Bina 5 Ayat</h3>
-        <p class="activity-desc">Bina 5 ayat menggunakan kata majmuk di atas. Tulis satu ayat pada setiap baris.</p>
+        <div class="activity-header">
+            <h3>✍️ Aktiviti 2: Bina 5 Ayat</h3>
+        </div>
+        <p class="activity-desc">Bina 5 ayat berdasarkan Kata Majmuk yang telah dipadankan di atas. Tulis menggunakan jari secara kemas.</p>
         
-        <div class="tools">
-            <button class="btn-pen active-tool" onclick="setMode('pen', 'canvas2', this)">✏️ Pen</button>
-            <button class="btn-eraser" onclick="setMode('eraser', 'canvas2', this)">🧽 Pemadam</button>
-            <button class="btn-clear" onclick="clearCanvas('canvas2')">🗑️ Padam Semua</button>
+        <div id="pagesContainer">
+            <!-- Muka Surat Kertas Ditambah di Sini -->
         </div>
-        <div class="canvas-container">
-            <canvas id="canvas2"></canvas>
-        </div>
+
+        <button class="btn-add-page" onclick="addPaperPage()">➕ Tambah Kertas (Jika Tidak Muat)</button>
     </div>
 
-    <button class="btn-submit" onclick="submitWork()">🚀 Hantar Kerja</button>
+    <button class="btn-submit" onclick="submitWork()">🚀 HANTAR KERJA KE GOOGLE SHEET</button>
     <div id="loading" class="loading">⏳ Menghantar data ke Google Sheet... Sila tunggu sebentar.</div>
 </div>
 
-<!-- BORANG TERSEMBUNYI UNTUK PENGHANTARAN DATA TANPA SEKATAN CORS -->
+<!-- BORANG TERSEMBUNYI UNTUK GOOGLE APPS SCRIPT -->
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { onSuccess(); }"></iframe>
 <form id="scriptForm" action="https://script.google.com/macros/s/AKfycbxL2F2fhwhUeS58e10BhxFX9Eu2rL8uyNdFBIAGN7XI3xleLmwsMZ4cKCSWz2ISaAL3GQ/exec" method="POST" target="hidden_iframe" style="display:none;">
     <input type="hidden" name="nama" id="f_nama">
@@ -134,27 +193,154 @@
 
 <script>
     let submitted = false;
+    let selectedLeft = null;
+    let selectedRight = null;
+    let matchedCount = 0;
+    let pageCount = 0;
+    const canvasList = [];
 
-    function setupCanvas(canvasId) {
+    // DATA AKTIVITI 1 (KATA MAJMUK)
+    const pairs = [
+        { left: "Pasar", right: "raya" },
+        { left: "Tukang", right: "gunting" },
+        { left: "Nasi", right: "ayam" },
+        { left: "Tengah", right: "hari" },
+        { left: "Alat", right: "tulis" },
+        { left: "Tali", right: "pinggang" },
+        { left: "Beg", right: "tangan" },
+        { left: "Tempat", right: "letak kereta" }
+    ];
+
+    // INITIALIZE AKTIVITI 1 (PADANKAN PERKATAAN)
+    function initMatchingGame() {
+        const colLeft = document.getElementById('colLeft');
+        const colRight = document.getElementById('colRight');
+
+        // Shuffled right options
+        const shuffledRight = [...pairs].map(p => p.right).sort(() => Math.random() - 0.5);
+
+        colLeft.innerHTML = '';
+        colRight.innerHTML = '';
+
+        pairs.forEach((pair, idx) => {
+            const btnLeft = document.createElement('div');
+            btnLeft.className = 'match-card';
+            btnLeft.innerText = pair.left;
+            btnLeft.dataset.word = pair.left;
+            btnLeft.onclick = () => selectCard(btnLeft, 'left');
+            colLeft.appendChild(btnLeft);
+        });
+
+        shuffledRight.forEach((rightWord) => {
+            const btnRight = document.createElement('div');
+            btnRight.className = 'match-card';
+            btnRight.innerText = rightWord;
+            btnRight.dataset.word = rightWord;
+            btnRight.onclick = () => selectCard(btnRight, 'right');
+            colRight.appendChild(btnRight);
+        });
+    }
+
+    function selectCard(card, side) {
+        if (card.classList.contains('matched')) return;
+
+        if (side === 'left') {
+            document.querySelectorAll('#colLeft .match-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedLeft = card;
+        } else {
+            document.querySelectorAll('#colRight .match-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedRight = card;
+        }
+
+        if (selectedLeft && selectedRight) {
+            checkMatch();
+        }
+    }
+
+    function checkMatch() {
+        const leftText = selectedLeft.dataset.word;
+        const rightText = selectedRight.dataset.word;
+        const correctPair = pairs.find(p => p.left === leftText);
+
+        if (correctPair && correctPair.right === rightText) {
+            // BETUL
+            selectedLeft.className = 'match-card matched';
+            selectedRight.className = 'match-card matched';
+            matchedCount++;
+            document.getElementById('matchScore').innerText = `${matchedCount} / 8 Berjaya`;
+            selectedLeft = null;
+            selectedRight = null;
+            if (matchedCount === 8) {
+                alert("🎉 Syabas! Anda telah berjaya memadankan semua Kata Majmuk dengan betul!");
+            }
+        } else {
+            // SALAH
+            selectedLeft.classList.add('wrong');
+            selectedRight.classList.add('wrong');
+            setTimeout(() => {
+                if(selectedLeft) selectedLeft.classList.remove('selected', 'wrong');
+                if(selectedRight) selectedRight.classList.remove('selected', 'wrong');
+                selectedLeft = null;
+                selectedRight = null;
+            }, 500);
+        }
+    }
+
+    // TAMBAH KERTAS TULISAN (AKTIVITI 2)
+    function addPaperPage() {
+        pageCount++;
+        const canvasId = `canvas_page_${pageCount}`;
+        const container = document.getElementById('pagesContainer');
+
+        const pageWrapper = document.createElement('div');
+        pageWrapper.className = 'page-wrapper';
+        pageWrapper.innerHTML = `
+            <span class="page-title">📄 Kertas Muka Surat ${pageCount}</span>
+            <div class="tools">
+                <button class="tool-btn btn-pen active-tool" onclick="setCanvasMode('${canvasId}', 'pen', this)">✏️ Pen</button>
+                <button class="tool-btn btn-eraser" onclick="setCanvasMode('${canvasId}', 'eraser', this)">🧽 Pemadam</button>
+                <button class="tool-btn btn-clear" onclick="clearCanvas('${canvasId}')">🗑️ Padam Semua</button>
+            </div>
+            <div class="canvas-container">
+                <canvas id="${canvasId}"></canvas>
+            </div>
+        `;
+
+        container.appendChild(pageWrapper);
+        setupDrawingCanvas(canvasId);
+    }
+
+    function setupDrawingCanvas(canvasId) {
         const canvas = document.getElementById(canvasId);
         const ctx = canvas.getContext('2d');
-        
+
         canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = 320; 
+        canvas.height = 300;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         let drawing = false;
-        let mode = 'pen'; 
-        
+        let mode = 'pen';
+
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
 
-        const startPosition = (e) => {
-            drawing = true;
-            draw(e);
+        const getPos = (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            return { x: clientX - rect.left, y: clientY - rect.top };
         };
 
-        const endPosition = () => {
+        const startDraw = (e) => {
+            drawing = true;
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+        };
+
+        const stopDraw = () => {
             drawing = false;
             ctx.beginPath();
         };
@@ -162,108 +348,168 @@
         const draw = (e) => {
             if (!drawing) return;
             e.preventDefault();
-            
-            const rect = canvas.getBoundingClientRect();
-            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-
-            const x = clientX - rect.left;
-            const y = clientY - rect.top;
+            const pos = getPos(e);
 
             if (mode === 'pen') {
                 ctx.globalCompositeOperation = "source-over";
-                ctx.lineWidth = 3.5; 
-                ctx.strokeStyle = '#000000'; 
+                ctx.lineWidth = 3.5;
+                ctx.strokeStyle = '#000000';
             } else {
                 ctx.globalCompositeOperation = "destination-out";
-                ctx.lineWidth = 25; 
+                ctx.lineWidth = 25;
             }
 
-            ctx.lineTo(x, y);
+            ctx.lineTo(pos.x, pos.y);
             ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(x, y);
         };
 
-        canvas.addEventListener('mousedown', startPosition);
-        canvas.addEventListener('mouseup', endPosition);
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mouseup', stopDraw);
         canvas.addEventListener('mousemove', draw);
-        
-        canvas.addEventListener('touchstart', startPosition, { passive: false });
-        canvas.addEventListener('touchend', endPosition);
+
+        canvas.addEventListener('touchstart', startDraw, { passive: false });
+        canvas.addEventListener('touchend', stopDraw);
         canvas.addEventListener('touchmove', draw, { passive: false });
 
-        canvas.setMode = function(newMode) { mode = newMode; };
-        canvas.clear = function() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        };
+        canvas.setMode = (newMode) => { mode = newMode; };
+        canvas.clear = () => { ctx.clearRect(0, 0, canvas.width, canvas.height); };
+
+        canvasList.push(canvasId);
     }
 
-    setupCanvas('canvas1');
-    setupCanvas('canvas2');
+    function setCanvasMode(canvasId, mode, btn) {
+        const canvas = document.getElementById(canvasId);
+        canvas.setMode(mode);
 
-    function setMode(mode, canvasId, buttonElement) {
-        document.getElementById(canvasId).setMode(mode);
-        const toolsBox = buttonElement.parentElement;
-        const buttons = toolsBox.getElementsByTagName('button');
-        for(let btn of buttons) { btn.classList.remove('active-tool'); }
-        buttonElement.classList.add('active-tool');
+        const toolsBox = btn.parentElement;
+        toolsBox.querySelectorAll('button').forEach(b => b.classList.remove('active-tool'));
+        btn.classList.add('active-tool');
     }
 
+    // FUNGSI PADAM SEMUA (100% BERFUNGSINYA)
     function clearCanvas(canvasId) {
-        if(confirm("Padam semua tulisan di ruangan ini?")) {
-            document.getElementById(canvasId).clear();
+        if (confirm("Adakah anda pasti mahu memadam semua tulisan pada muka surat ini?")) {
+            const canvas = document.getElementById(canvasId);
+            canvas.clear();
         }
     }
 
-    function getCanvasWithWhiteBackground(canvasId) {
-        const originalCanvas = document.getElementById(canvasId);
+    // CIPTA GAMBAR RINGKASAN AKTIVITI 1
+    function generateActivity1Image() {
         const tempCanvas = document.createElement('canvas');
-        tempCanvas.width = originalCanvas.width;
-        tempCanvas.height = originalCanvas.height;
-        const tCtx = tempCanvas.getContext('2d');
-        
-        tCtx.fillStyle = "#ffffff";
-        tCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-        tCtx.drawImage(originalCanvas, 0, 0);
-        
+        tempCanvas.width = 600;
+        tempCanvas.height = 350;
+        const ctx = tempCanvas.getContext('2d');
+
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
+
+        ctx.fillStyle = "#d35400";
+        ctx.font = "bold 22px Nunito, sans-serif";
+        ctx.fillText("Aktiviti 1: Padankan Kata Majmuk", 20, 40);
+
+        ctx.fillStyle = "#2c3e50";
+        ctx.font = "16px Nunito, sans-serif";
+        ctx.fillText(`Markah Padanan: ${matchedCount} / 8 Kata Majmuk`, 20, 70);
+
+        ctx.strokeStyle = "#e1e8ed";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(15, 85, 570, 240);
+
+        pairs.forEach((p, idx) => {
+            const col = idx < 4 ? 0 : 1;
+            const row = idx % 4;
+            const x = 30 + (col * 280);
+            const y = 120 + (row * 50);
+
+            const isMatched = matchedCount > 0; // Gambaran visual ringkas
+            ctx.fillStyle = "#00b894";
+            ctx.font = "bold 18px Nunito, sans-serif";
+            ctx.fillText(`${idx + 1}. ${p.left} ${p.right}`, x, y);
+        });
+
         return tempCanvas.toDataURL('image/png');
     }
 
-    function calculateAIScore(canvasId) {
-        const canvas = document.getElementById(canvasId);
-        const ctx = canvas.getContext('2d');
-        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        let filledPixels = 0;
+    // GABUNGKAN SEMUA KERTAS TULISAN JADI SATU GAMBAR TINGGI
+    function generateActivity2CombinedImage() {
+        if (canvasList.length === 0) return "";
 
-        for (let i = 3; i < imgData.data.length; i += 4) {
-            if (imgData.data[i] > 0) filledPixels++;
-        }
+        const singleCanvas = document.getElementById(canvasList[0]);
+        const width = singleCanvas.width;
+        const height = singleCanvas.height;
 
-        const ratio = filledPixels / (canvas.width * canvas.height);
-        
-        if (ratio > 0.02) return 95;      
-        else if (ratio > 0.01) return 80; 
-        else if (ratio > 0.003) return 60;
-        else return 30;                   
+        const combinedCanvas = document.createElement('canvas');
+        combinedCanvas.width = width;
+        combinedCanvas.height = height * canvasList.length;
+        const ctx = combinedCanvas.getContext('2d');
+
+        // Latar Putih
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, combinedCanvas.width, combinedCanvas.height);
+
+        canvasList.forEach((cId, idx) => {
+            const orig = document.getElementById(cId);
+            
+            // Lukis latar belakang garisan biru buku latihan
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, idx * height, width, height);
+            
+            // Lukis garisan
+            ctx.strokeStyle = "#74b9ff";
+            ctx.lineWidth = 2;
+            for(let y = 48; y < height; y += 40) {
+                ctx.beginPath();
+                ctx.moveTo(0, (idx * height) + y);
+                ctx.lineTo(width, (idx * height) + y);
+                ctx.stroke();
+            }
+
+            // Lukis tulisan murid
+            ctx.drawImage(orig, 0, idx * height);
+        });
+
+        return combinedCanvas.toDataURL('image/png');
     }
 
-    function submitWork() {
-        const nama = document.getElementById('nama').value;
-        const kelas = document.getElementById('kelas').value;
+    // KIRA MARKAH AI KELENGKAPAN
+    function calculateAIScore() {
+        let totalPixels = 0;
+        canvasList.forEach(cId => {
+            const canvas = document.getElementById(cId);
+            const ctx = canvas.getContext('2d');
+            const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            for (let i = 3; i < imgData.data.length; i += 4) {
+                if (imgData.data[i] > 0) totalPixels++;
+            }
+        });
+
+        const act1Score = (matchedCount / 8) * 50; // 50% dari Aktiviti 1
+        let act2Score = 0; // 50% dari Aktiviti 2
         
+        if (totalPixels > 5000) act2Score = 50;
+        else if (totalPixels > 2500) act2Score = 35;
+        else if (totalPixels > 500) act2Score = 20;
+
+        return Math.min(100, Math.round(act1Score + act2Score));
+    }
+
+    // HANTAR KERJA
+    function submitWork() {
+        const nama = document.getElementById('nama').value.trim();
+        const kelas = document.getElementById('kelas').value.trim();
+
         if (!nama || !kelas) {
             alert('Sila isi Nama dan Kelas terlebih dahulu.');
             return;
         }
 
-        const img1 = getCanvasWithWhiteBackground('canvas1');
-        const img2 = getCanvasWithWhiteBackground('canvas2');
-        const markah = calculateAIScore('canvas2');
+        const img1 = generateActivity1Image();
+        const img2 = generateActivity2CombinedImage();
+        const markah = calculateAIScore();
 
         document.getElementById('loading').style.display = 'block';
 
-        // Masukkan nilai ke dalam form tersembunyi
         document.getElementById('f_nama').value = nama;
         document.getElementById('f_kelas').value = kelas;
         document.getElementById('f_markah').value = markah + "%";
@@ -271,18 +517,22 @@
         document.getElementById('f_image2').value = img2;
 
         submitted = true;
-        // Hantar form ke Google Script secara senyap
         document.getElementById('scriptForm').submit();
     }
 
     function onSuccess() {
         document.getElementById('loading').style.display = 'none';
         const markah = document.getElementById('f_markah').value;
-        alert(`✅ BERJAYA!\n\nKerja anda telah selamat dihantar kepada cikgu.\nMarkah AI Kelengkapan: ${markah}`);
-        document.getElementById('canvas1').clear();
-        document.getElementById('canvas2').clear();
+        alert(`✅ BERJAYA!\n\nKerja anda telah selamat dihantar kepada Cikgu.\nMarkah AI Kelengkapan: ${markah}`);
+        
+        // Clear canvases
+        canvasList.forEach(cId => document.getElementById(cId).clear());
         submitted = false;
     }
+
+    // JALANKAN PROGRAM
+    initMatchingGame();
+    addPaperPage(); // Muka surat 1 automatik
 </script>
 </body>
 </html>
