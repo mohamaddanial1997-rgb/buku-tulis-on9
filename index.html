@@ -122,8 +122,18 @@
     <div id="loading" class="loading">⏳ Menghantar data ke Google Sheet... Sila tunggu sebentar.</div>
 </div>
 
+<!-- BORANG TERSEMBUNYI UNTUK PENGHANTARAN DATA TANPA SEKATAN CORS -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { onSuccess(); }"></iframe>
+<form id="scriptForm" action="https://script.google.com/macros/s/AKfycbxL2F2fhwhUeS58e10BhxFX9Eu2rL8uyNdFBIAGN7XI3xleLmwsMZ4cKCSWz2ISaAL3GQ/exec" method="POST" target="hidden_iframe" style="display:none;">
+    <input type="hidden" name="nama" id="f_nama">
+    <input type="hidden" name="kelas" id="f_kelas">
+    <input type="hidden" name="markah" id="f_markah">
+    <input type="hidden" name="image1" id="f_image1">
+    <input type="hidden" name="image2" id="f_image2">
+</form>
+
 <script>
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyePHeUYLmKF0bSrIErzljkTl3wLYzSFAvnXSihMWATWu1qq4H7XwiF_dJ4Dro6k1CQWw/exec'; 
+    let submitted = false;
 
     function setupCanvas(canvasId) {
         const canvas = document.getElementById(canvasId);
@@ -220,7 +230,6 @@
         return tempCanvas.toDataURL('image/png');
     }
 
-    // AI PINTAR: Kira markah berdasarkan peratusan kepadatan strok tulisan murid
     function calculateAIScore(canvasId) {
         const canvas = document.getElementById(canvasId);
         const ctx = canvas.getContext('2d');
@@ -228,18 +237,18 @@
         let filledPixels = 0;
 
         for (let i = 3; i < imgData.data.length; i += 4) {
-            if (imgData.data[i] > 0) filledPixels++; // Kira piksel yang dilukis
+            if (imgData.data[i] > 0) filledPixels++;
         }
 
         const ratio = filledPixels / (canvas.width * canvas.height);
         
-        if (ratio > 0.02) return 95;      // Tulisan sangat banyak/penuh
-        else if (ratio > 0.01) return 80; // Tulisan sederhana
-        else if (ratio > 0.003) return 60;// Tulisan sikit
-        else return 30;                   // Hampir kosong
+        if (ratio > 0.02) return 95;      
+        else if (ratio > 0.01) return 80; 
+        else if (ratio > 0.003) return 60;
+        else return 30;                   
     }
 
-    async function submitWork() {
+    function submitWork() {
         const nama = document.getElementById('nama').value;
         const kelas = document.getElementById('kelas').value;
         
@@ -250,37 +259,29 @@
 
         const img1 = getCanvasWithWhiteBackground('canvas1');
         const img2 = getCanvasWithWhiteBackground('canvas2');
-        
-        // Kira markah secara automatik
         const markah = calculateAIScore('canvas2');
 
         document.getElementById('loading').style.display = 'block';
 
-        const payload = {
-            nama: nama,
-            kelas: kelas,
-            markah: markah + "%",
-            image1: img1,
-            image2: img2
-        };
+        // Masukkan nilai ke dalam form tersembunyi
+        document.getElementById('f_nama').value = nama;
+        document.getElementById('f_kelas').value = kelas;
+        document.getElementById('f_markah').value = markah + "%";
+        document.getElementById('f_image1').value = img1;
+        document.getElementById('f_image2').value = img2;
 
-        try {
-            await fetch(APPS_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors', 
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
+        submitted = true;
+        // Hantar form ke Google Script secara senyap
+        document.getElementById('scriptForm').submit();
+    }
 
-            alert(`✅ BERJAYA!\n\nKerja anda telah dihantar.\nMarkah AI Kelengkapan: ${markah}/100`);
-            document.getElementById('canvas1').clear();
-            document.getElementById('canvas2').clear();
-            
-        } catch (error) {
-            alert('❌ Ralat semasa menghantar. Sila cuba lagi.');
-        } finally {
-            document.getElementById('loading').style.display = 'none';
-        }
+    function onSuccess() {
+        document.getElementById('loading').style.display = 'none';
+        const markah = document.getElementById('f_markah').value;
+        alert(`✅ BERJAYA!\n\nKerja anda telah selamat dihantar kepada cikgu.\nMarkah AI Kelengkapan: ${markah}`);
+        document.getElementById('canvas1').clear();
+        document.getElementById('canvas2').clear();
+        submitted = false;
     }
 </script>
 </body>
